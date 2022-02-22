@@ -22,7 +22,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table > 
+        <table class="table table-striped">
             <thead>
                 <tr><th>Id</th>
                 <th>Usuario</th>
@@ -33,6 +33,9 @@
                 <th></th>
                 </tr>
             </thead>
+
+            @if (Model.Count > 0)
+            {
             <tbody>
                 @foreach(Emprestimo e in Model)
                 {
@@ -47,6 +50,16 @@
                 </tr>
                 }
             </tbody>
+            }
+            else
+            {
+
+                <tbody>
+                    <tr>
+                        <td colspan="5">Nenhum registro encontrado</td>
+                    </tr>
+                </tbody>
+            }
         </table>
     </div>
 </div>
