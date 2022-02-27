@@ -14422,8 +14422,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\laerc\\Downloads\\Biblioteca\\Views\\Usuario\\editarUsuario.cshtml",
-      "TargetPath": "Views\\Usuario\\editarUsuario.cshtml",
+      "FilePath": "c:\\Users\\laerc\\Downloads\\Biblioteca\\Views\\Usuario\\EditarUsuario.cshtml",
+      "TargetPath": "Views\\Usuario\\EditarUsuario.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14484,6 +14484,11 @@
     {
       "FilePath": "c:\\Users\\laerc\\Downloads\\Biblioteca\\Views\\Usuario\\RegistrarUsuarios.cshtml",
       "TargetPath": "Views\\Usuario\\RegistrarUsuarios.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\laerc\\Downloads\\Biblioteca\\Views\\Usuario\\NeedAdmin.cshtml",
+      "TargetPath": "Views\\Usuario\\NeedAdmin.cshtml",
       "FileKind": "mvc"
     },
     {

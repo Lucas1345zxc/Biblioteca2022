@@ -1,80 +1,97 @@
 using Biblioteca.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace Biblioteca.Controllers
 {
-
     public class UsuarioController : Controller
     {
-
-
-        public IActionResult ListaDeUsuarios()
-        {
+        public IActionResult ListaDeUsuarios(){
+            
             Autenticacao.CheckLogin(this);
-            List<Usuario> listagem = new UsuarioService().Listar();
-            return View(listagem);
+            Autenticacao.verficaSeUsuarioAdminExiste(this);
+            
+            List<Usuario> Listagem = new UsuarioService().Listar();
+
+            return View(Listagem);
+
         }
 
-        public IActionResult editarUsuario(int id)
+        public IActionResult EditarUsuario(int id)
         {
+            
+            Autenticacao.CheckLogin(this);
+            Autenticacao.verficaSeUsuarioAdminExiste(this);
+
             Usuario user = new UsuarioService().Listar(id);
             return View(user);
+                        
         }
 
         [HttpPost]
+         public IActionResult EditarUsuario(Usuario userEditado)
+        {
+            
+            userEditado.Senha = Criptografo.TextoCriptografado(userEditado.Senha);
+            UsuarioService us = new UsuarioService();
+            us.EditarUsuario(userEditado);
+            return RedirectToAction("ListaDeUsuarios");
+                        
+        }
 
-        public IActionResult editarUsuario(Usuario userEditado)
-    {
-
-        UsuarioService us = new UsuarioService();
-        us.editarUsuario(userEditado);
-        
-        return RedirectToAction ("ListaDeUsuarios");
-
-    }
-
-     public IActionResult RegistrarUsuarios()
-     {
-
-      return View();
- 
-     }
-     
+        public IActionResult RegistrarUsuarios()
+        {
+    
+            Autenticacao.CheckLogin(this);
+            Autenticacao.verficaSeUsuarioAdminExiste(this);
+            return View();
+                        
+        }
 
         [HttpPost]
         public IActionResult RegistrarUsuarios(Usuario novoUser)
         {
+           
+            Autenticacao.CheckLogin(this);
+            Autenticacao.verficaSeUsuarioAdminExiste(this);
 
-            //novoUser.Senha = criptografar...
-
-            UsuarioService us = new UsuarioService();
-            us.incluirUsuario(novoUser);
-
-            return RedirectToAction("ListaDeUsuarios");
-
-        }
-
-        public IActionResult ExcluirUsuario(int id){
+            novoUser.Senha = Criptografo.TextoCriptografado(novoUser.Senha);
 
             UsuarioService us = new UsuarioService();
-            us.excluirUsuario(id);
-            return RedirectToAction("ListaDeUsuarios");
+            us.IncluirUsuario(novoUser);
 
+            return RedirectToAction("ListaDeUsuarios");
+                        
         }
 
-        public IActionResult Sair(){
+        public IActionResult ExcluirUsuario(int id)
+        {
+           
+            Autenticacao.CheckLogin(this);
+           
+            UsuarioService us = new UsuarioService();
+            us.ExcluirUsuario(id);
+
+            return RedirectToAction("ListaDeUsuarios");
+                        
+        }
+
+          public IActionResult Sair()
+        {
+           
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
+                        
         }
 
-        public IActionResult NeedAdmin(){
-            
+        public IActionResult NeedAdmin()
+        {
+            Autenticacao.CheckLogin(this);
             return View();
-            
         }
-
     }
 
 }

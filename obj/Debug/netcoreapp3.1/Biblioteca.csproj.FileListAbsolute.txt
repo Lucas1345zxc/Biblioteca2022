@@ -54,3 +54,4 @@ C:\Users\laerc\Downloads\Biblioteca\obj\Debug\netcoreapp3.1\Biblioteca.genruntim
 C:\Users\laerc\Downloads\Biblioteca\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\ListaDeUsuarios.cshtml.g.cs
 C:\Users\laerc\Downloads\Biblioteca\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\editarUsuario.cshtml.g.cs
 C:\Users\laerc\Downloads\Biblioteca\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\RegistrarUsuarios.cshtml.g.cs
+C:\Users\laerc\Downloads\Biblioteca\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\NeedAdmin.cshtml.g.cs

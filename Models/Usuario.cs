@@ -6,7 +6,7 @@ namespace Biblioteca.Models
    {
 
        public static int ADMIN = 0;
-        public static int PADRAO = 1;
+        public static int PADRAO =1;
 
 
         

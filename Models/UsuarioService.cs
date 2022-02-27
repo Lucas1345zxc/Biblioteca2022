@@ -1,72 +1,65 @@
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+
 
 
 namespace Biblioteca.Models
-
 {
+    public class UsuarioService
+    {
+        public void IncluirUsuario(Usuario user)
+        {
+            using(BibliotecaContext bc = new BibliotecaContext())
+            {
+                bc.Usuarios.Add(user);
+                bc.SaveChanges();
 
-   public class UsuarioService
-   {
+            }
+        }
 
-     public void incluirUsuario(Usuario user){
+         public void EditarUsuario(Usuario user)
+        {
+            using(BibliotecaContext bc = new BibliotecaContext())
+            {
+                Usuario u = bc.Usuarios.Find(user.Id);
+               
+                u.Login = user.Login;
+                u.Nome = user.Nome;
+                u.Senha = user.Senha;
+                u.Tipo = user.Tipo;
+                                
+                bc.SaveChanges();
+            }
+        }
 
-      using(BibliotecaContext bc = new BibliotecaContext()){
+        public void ExcluirUsuario(int id)
+        {
+            using(BibliotecaContext bc = new BibliotecaContext())
+            {
+               bc.Usuarios.Remove(bc.Usuarios.Find(id));
+               bc.SaveChanges();
+            }
+        }
 
-          bc.Usuarios.Add(user);
-          bc.SaveChanges();
-      }
+        public Usuario Listar(int Id)
+        {
+            using(BibliotecaContext bc = new BibliotecaContext())
+            {
+               return bc.Usuarios.Find(Id);
+               
+            }
+        }
 
-
-
-
-     }
-
-
-    public void editarUsuario(Usuario user){
-
-        using(BibliotecaContext bc = new BibliotecaContext()){
-
-          Usuario u = bc.Usuarios.Find(user.Id);
-
-          u.Login = user.Login;
-          u.Nome = user.Nome;
-          u.Senha = user.Senha;
-          u.Tipo = user.Tipo;
-          bc.SaveChanges();
-      }
+        public List<Usuario> Listar()
+        {
+            using(BibliotecaContext bc = new BibliotecaContext())
+            {
+               return bc.Usuarios.ToList();
+                              
+            }
+        }
 
     }
-    
-    public void excluirUsuario(int id){
-        
-        using(BibliotecaContext bc = new BibliotecaContext()){
-
-          bc.Remove(bc.Usuarios.Find(id));
-          bc.SaveChanges();
-      }
-
-    }
-
-     public Usuario Listar(int id){
-
-      using(BibliotecaContext bc = new BibliotecaContext()){
-           return bc.Usuarios.Find(id);
-
-     }
-
-   }
-
-   public List<Usuario> Listar(){
-
-         using(BibliotecaContext bc = new BibliotecaContext())
-         {
-
-           return bc.Usuarios.ToList();
-   }
-
-   }
-
-   }
 
 }
